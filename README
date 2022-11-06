@@ -1,18 +1,18 @@
 Linux kernel
 ============
-
-This file was moved to Documentation/admin-guide/README.rst
-
-Please notice that there are several guides for kernel developers and users.
-These guides can be rendered in a number of formats, like HTML and PDF.
-
-In order to build the documentation, use ``make htmldocs`` or
-``make pdfdocs``.
-
-There are various text files in the Documentation/ subdirectory,
-several of them using the Restructured Text markup notation.
-See Documentation/00-INDEX for a list of what is contained in each file.
-
-Please read the Documentation/process/changes.rst file, as it contains the
-requirements for building and running the kernel, and information about
-the problems which may result by upgrading your kernel.
+steps
+1. 建立System call
+	1. mkdir /hello
+	2. Makefile
+2. cd .. 回上一層
+3. vim Makefile
+	3.1 找出 cory-y += kernel.... 最後加上 /hello (大約在1073行)
+4. vim include/linux/syscalls.h
+	4.1 最後一行加上 asmlinkage long sys_helloworld(void);
+5. vim arch/x86/entry/syscalls/syscall_64.tbl
+	5.1 最後一行加上 common hello sys_hello
+6. make menuconfig (預設)
+7. sudo make
+8. make modules_install install
+9. sudo update grub
+10.reboot
