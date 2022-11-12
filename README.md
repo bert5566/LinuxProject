@@ -16,6 +16,9 @@ steps ============ <br>
 9. sudo update gru
 10. reboot
 
-mmstruct
-![image](https://user-images.githubusercontent.com/49525437/201469043-8e69a072-429e-4c8f-8ff5-09887a3412b5.png)
-
+## mmstruct <br>
+![image](https://user-images.githubusercontent.com/49525437/201469043-8e69a072-429e-4c8f-8ff5-09887a3412b5.png) <br>
+[start_code,end_code) : 表示code 地址 <br>
+[start_data,end_start) : 表示data地址 <br>
+[start_brk,brk) : 分别表示heap段的起始空間 和當前的heap指針。 <br>
+[start_stack,end_stack) : 表示stack 的地址空間範圍。 <br>
