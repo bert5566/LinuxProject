@@ -13,8 +13,12 @@ steps ============ <br>
 6. make menuconfig (預設)
 7. sudo make
 8. make modules_install install
-9. sudo update gru
-10. reboot
+```C
+合併指令
+-sudo make -j && sudo make -j modules_install && sudo make -j install
+```
+10. sudo update grub
+11. reboot
 
 ## mmstruct <br>
 ![image](https://user-images.githubusercontent.com/49525437/201469043-8e69a072-429e-4c8f-8ff5-09887a3412b5.png) <br>
