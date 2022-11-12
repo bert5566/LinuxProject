@@ -22,3 +22,12 @@ steps ============ <br>
 [start_data,end_start) : 表示data地址 <br>
 [start_brk,brk) : 分别表示heap段的起始空間 和當前的heap指針。 <br>
 [start_stack,end_stack) : 表示stack 的地址空間範圍。 <br>
+
+
+```C
+	struct mm_struct * mm ;
+	mm->start_code;
+```
+
+	
+	
