@@ -33,5 +33,6 @@ steps ============ <br>
 	mm->start_code;
 ```
 
+Linux用task_struct來描述一個process，透過task_struct->mm->mmap可以找到vm_area_struct，linux用利用VMA(virtual memory area)來描述每個segment特性，大小
 	
 	
