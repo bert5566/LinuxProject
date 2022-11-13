@@ -21,7 +21,7 @@ steps ============ <br>
 11. reboot
 
 ## mmstruct <br>
-![image](https://user-images.githubusercontent.com/49525437/201469043-8e69a072-429e-4c8f-8ff5-09887a3412b5.png) <br>
+![image](https://user-images.githubusercontent.com/49525437/201509271-72ed68cf-449f-46d5-88c8-2bb31e4bcbba.png)<br>
 [start_code,end_code) : 表示code 地址 <br>
 [start_data,end_start) : 表示data地址 <br>
 [start_brk,brk) : 分别表示heap段的起始空間 和當前的heap指針。 <br>
