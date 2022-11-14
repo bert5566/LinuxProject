@@ -7,7 +7,7 @@ steps ============ <br>
 3. vim Makefile
 	1. 找出 cory-y += kernel.... 最後加上 /hello (大約在1073行)
 4. vim include/linux/syscalls.h
-	1. 最後一行加上 asmlinkage long sys_helloworld(void);
+	1. 最後一行加上 asmlinkage long sys_hello(void);
 5. vim arch/x86/entry/syscalls/syscall_64.tbl
 	1. 最後一行加上 common hello sys_hello
 6. make menuconfig (預設)
@@ -34,5 +34,6 @@ steps ============ <br>
 ```
 
 Linux用task_struct來描述一個process，透過task_struct->mm->mmap可以找到vm_area_struct，linux用利用VMA(virtual memory area)來描述每個segment特性，大小
-	
+
+kernel頁碼轉換 https://zhuanlan.zhihu.com/p/436879901
 	
