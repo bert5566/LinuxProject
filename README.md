@@ -39,4 +39,4 @@ kernel頁碼轉換 https://zhuanlan.zhihu.com/p/436879901
 
 
 ### System call 傳遞參數
-	
+https://biscuitos.github.io/blog/SYSCALL_PARAMENTER_STRINGS/
