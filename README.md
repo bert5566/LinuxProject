@@ -36,4 +36,7 @@ steps ============ <br>
 Linux用task_struct來描述一個process，透過task_struct->mm->mmap可以找到vm_area_struct，linux用利用VMA(virtual memory area)來描述每個segment特性，大小
 
 kernel頁碼轉換 https://zhuanlan.zhihu.com/p/436879901
-	
+
+
+### System call 傳遞參數
+https://biscuitos.github.io/blog/SYSCALL_PARAMENTER_STRINGS/
