@@ -38,5 +38,8 @@ Linux用task_struct來描述一個process，透過task_struct->mm->mmap可以找
 ### System call 傳遞參數
 https://biscuitos.github.io/blog/SYSCALL_PARAMENTER_STRINGS/
 
+### Memory Management
+https://ithelp.ithome.com.tw/articles/10300456
+
 範例1 https://hackmd.io/@eugenechou/H1LGA9AiB#Project-1
 範例2 https://zhuanlan.zhihu.com/p/436879901
