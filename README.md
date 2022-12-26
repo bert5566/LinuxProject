@@ -1,3 +1,4 @@
+安裝注意事項 https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fstaff.csie.ncu.edu.tw%2Fhsufh%2FCOURSES%2FFALL2022%2Flinux_3.10_manual_2022.pptx&wdOrigin=BROWSELINK
 # Linux kernel
 steps ============ <br>
 1. 建立System call 
