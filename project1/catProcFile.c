@@ -4,16 +4,14 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-
+#define MEMORY_SIZE 1000000
 #define gettid() syscall(SYS_gettid)
 
-void *thread_func(void *arg) {
-	printf("Thread function (TID %d) running at virtual address: %p\n", gettid(), &thread_func);
-
+void thread_func() {
 	char line[256];
 	FILE *fp;
 	char path[32];
-
+	printf("gettid() %d \n" , gettid());
 	snprintf(path, sizeof(path), "/proc/%d/maps", gettid());
 	fp = fopen(path, "r");
 	if (fp == NULL) {
@@ -24,7 +22,21 @@ void *thread_func(void *arg) {
 	printf("Physical addresses of thread function:\n");
 
 	while (fgets(line, sizeof(line), fp)!= NULL) {
-		printf("%s", line);
+		if (strstr(line, "[heap]")) {
+			printf("Heap segment: %s", line);
+		} else if (strstr(line, "[stack]")) {
+			printf("Stack segment: %s", line);
+		} else if (strstr(line, "[vdso]")) {
+			printf("Virtual dynamic shared object segment: %s", line);
+		} else if (strstr(line, "[vsyscall]")) {
+			printf("Virtual system call segment: %s", line);
+		} else if (strstr(line, "[vvar]")) {
+			printf("Virtual variable segment: %s", line);
+		} else if (strstr(line, "/")) {
+			printf("Mapped file segment: %s", line);
+		} else {
+			printf("Other segment: %s", line);
+		}
 	}
 
 	fclose(fp);
@@ -32,18 +44,28 @@ void *thread_func(void *arg) {
 }
 
 int main() {
-	pthread_t thread;
-	int rc;
+	pid_t pid;
+	int* result = calloc(MEMORY_SIZE , sizeof(int));
 
-	printf("Main function (TID %d) running at virtual address: %p\n", gettid(), &main);
+	pid = fork();
+	switch(pid) {
+		case -1:
+			perror("fork");
+			return 1;
 
-	rc = pthread_create(&thread, NULL, thread_func, NULL);
-	if (rc != 0) {
-		printf("Error creating thread\n");
-		return 1;
-	}
-
-	pthread_join(thread, NULL);
+		case 0:
+			// Child process
+			printf("I am the child process (PID %ld)\n", (long) getpid());
+			thread_func();
+			syscall(548,result);
+			break;
+		default:
+			// Parent process
+			printf("I am the parent process (PID %ld)\n", (long) getpid());
+			thread_func();
+			syscall(548,result);
+			break;
+	};
 
 	return 0;
 }
