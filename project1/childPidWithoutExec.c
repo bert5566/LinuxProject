@@ -54,16 +54,24 @@ int main() {
 			return 1;
 
 		case 0:
-			// Child process
+		{
+			// Child proces
 			printf("I am the child process (PID %ld)\n", (long) getpid());
 			thread_func();
+			sleep(5);
 			syscall(548,result);
+		}
 			break;
 		default:
-			// Parent process
+		{
+			// Parent process		
+			wait(NULL);
 			printf("I am the parent process (PID %ld)\n", (long) getpid());
 			thread_func();
 			syscall(548,result);
+			// 等待子進程結束
+			printf("Child process with ID %d terminated\n", pid);
+		}
 			break;
 	};
 

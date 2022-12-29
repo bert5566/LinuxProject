@@ -4,6 +4,7 @@
 #include <linux/highmem.h>
 #include <linux/hugetlb.h>
 
+
 unsigned long virtophys(unsigned int virt) {
 
 	pgd_t *pgd;
@@ -61,33 +62,30 @@ asmlinkage long sys_hello(int __user *result)
 		printk(KERN_INFO "Process name is %s (pid %d)\n", current->comm, current->pid);
 		
 		if (mm && mm->mmap) {
-			int i = 0;
-			for (vma = mm->mmap; vma; vma = vma->vm_next) {
-					++i;
-					printk(KERN_INFO , "%d\n" , i); 
-					printk(KERN_INFO , "vma start = 0x%d\n" , vma->vm_start); 
-					printk(KERN_INFO , "vma end = 0x%d\n" , vma->vm_end); 
-			};
+
+			start_phy = virtophys(mm->start_stack);
+			printk(KERN_INFO "Stack segment virtual start=0x%lx \n" ,mm->start_stack );
+			printk(KERN_INFO "Stack segment physical start=0x%lx \n" , start_phy );
+
+			start_phy = virtophys(mm->brk);
+			printk(KERN_INFO "Heap segment virtual start=0x%lx \n" ,mm->brk);
+			printk(KERN_INFO "Heap segment physical start=0x%lx \n" , start_phy );
+
+			start_phy = virtophys(mm->start_brk);
+			printk(KERN_INFO "BSS segment virtual start=0x%lx \n" ,mm->start_brk);
+			printk(KERN_INFO "BSS segment physical start=0x%lx \n" , start_phy );
 
 			start_phy = virtophys(mm->start_data);
 			end_phy = virtophys(mm->end_data);
-			printk(KERN_INFO "Data segment virtual start=0x%d , end=0x%d\n" , mm->start_data , mm->end_data);
-			printk(KERN_INFO "Data segment physical start=0x%d , end=0x%d\n" , start_phy , end_phy);
-
-
-			start_phy = virtophys(mm->start_stack);
-			printk(KERN_INFO "Stack segment virtual start=0x%d \n" ,mm->start_stack );
-			printk(KERN_INFO "Stack segment physical start=0x%d \n" , start_phy );
-
-			start_phy = virtophys(mm->start_brk);
-			printk(KERN_INFO "Heap segment virtual start=0x%d \n" ,mm->start_brk);
-			printk(KERN_INFO "Heap segment physical start=0x%d \n" , start_phy );
+			printk(KERN_INFO "Data segment virtual start=0x%lx , end=0x%lx\n" , mm->start_data , mm->end_data);
+			printk(KERN_INFO "Data segment physical start=0x%lx , end=0x%lx\n" , start_phy , end_phy);
 
 
 			start_phy = virtophys(mm->start_code);
 			end_phy = virtophys(mm->end_code);
-			printk(KERN_INFO "Code segment virtual start=0x%d , end=0x%d\n" , mm->start_code , mm->end_code);
-			printk(KERN_INFO "Code segment physical start=0x%d , end=0x%d\n" , start_phy , end_phy);
+			printk(KERN_INFO "Text segment virtual start=0x%lx , end=0x%lx\n" , mm->start_code , mm->end_code);
+			printk(KERN_INFO "Text segment physical start=0x%lx , end=0x%lx\n" , start_phy , end_phy);
+
 		};
 	};
 
